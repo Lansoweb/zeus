@@ -1,0 +1,40 @@
+{
+    "name": "los/zeus",
+    "type": "application",
+    "homepage": "https://github.com/Lansoweb/zeus",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leandro Silva",
+            "homepage": "http://leandrosilva.info/"
+        }
+    ],
+    "require": {
+        "roave/security-advisories": "dev-master",
+        "zendframework/zend-expressive": "1.0.0rc2",
+        "zendframework/zend-stdlib": "~2.7",
+        "zendframework/zend-expressive-fastroute": "^0.2",
+        "zendframework/zend-servicemanager": "^2.5",
+        "ocramius/proxy-manager": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "squizlabs/php_codesniffer": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zeus\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ZeusTest\\": "test/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "php vendor/squizlabs/php_codesniffer/scripts/phpcs",
+            "php vendor/phpunit/phpunit/phpunit"
+        ]
+    }
+}
