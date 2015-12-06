@@ -13,7 +13,7 @@ It's goal is to monitor servers and services in distributed systems, like in a m
 You can use this module to collect data from:
 * [Athena](https://github.com/Lansoweb/athena): To monitor the servers and it's services
 * [Cerberus](https://github.com/Lansoweb/cerberus): To monitor the services availability
-* [Kharon](https://github.com/Lansoweb/kharon): To monitor the services response times
+* [Hermes](https://github.com/Lansoweb/hermes): To monitor the services response times and trace requests through micro-services
 
 The data is displayed as dashboards and can be fetched via REST API.
 
