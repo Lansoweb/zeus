@@ -10,10 +10,13 @@ It's goal is to monitor servers and services in distributed systems, like in a m
 
 ## Usage
 
-You can use this module to collect data from:
-* [Athena](https://github.com/Lansoweb/athena): To monitor the servers and it's services
-* [Cerberus](https://github.com/Lansoweb/cerberus): To monitor the services availability
-* [Hermes](https://github.com/Lansoweb/hermes): To monitor the services response times and trace requests through micro-services
+You can attach a [Kharon](https://github.com/mt-olympus/kharon) to the services bellow to collect the data and transport them 
+to the Zeus server:
+
+* [Athena](https://github.com/mt-olympus/athena) (Service Discovery): To monitor the servers and it's services
+* [Cerberus](https://github.com/mt-olympus/cerberus) (Circuit Breaker): To monitor the services availability
+* [Hermes](https://github.com/mt-olympus/hermes) (API communication): To monitor the services response times and trace requests through micro-services
+* [LosLog](https://github.com/Lansoweb/LosLog) (Log): To monitor your application for errors
 
 The data is displayed as dashboards and can be fetched via REST API.
 
