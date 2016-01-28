@@ -1,9 +1,4 @@
 <?php
-/**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
- */
-
 return array(
     'router' => array(
         'routes' => array(
@@ -14,6 +9,36 @@ return array(
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
                         'action'     => 'index',
+                    ),
+                ),
+            ),
+            'cose' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/cose',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'cose',
+                    ),
+                ),
+            ),
+            'circle' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/circle',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'circle',
+                    ),
+                ),
+            ),
+            'request-view' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/view/request/:id',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'request',
                     ),
                 ),
             ),
