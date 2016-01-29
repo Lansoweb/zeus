@@ -1,5 +1,5 @@
 <?php
-namespace Api\V1\Rpc\Request;
+namespace Api\V1\Rpc\Hermes;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Db\TableGateway\TableGateway;
@@ -9,7 +9,7 @@ use ZF\ApiProblem\ApiProblemResponse;
 use ZF\ApiProblem\ApiProblem;
 use Zend\Db\Sql\Expression;
 
-class RequestController extends AbstractActionController
+class HermesController extends AbstractActionController
 {
     private $table;
 
@@ -18,7 +18,7 @@ class RequestController extends AbstractActionController
         $this->table = $table;
     }
 
-    public function requestAction()
+    public function hermesAction()
     {
         $params = $this->bodyParams();
 

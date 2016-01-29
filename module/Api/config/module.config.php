@@ -5,13 +5,23 @@ return array(
     ),
     'router' => array(
         'routes' => array(
-            'api.rpc.request' => array(
+            'api.rpc.hermes' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/request',
+                    'route' => '/hermes',
                     'defaults' => array(
-                        'controller' => 'Api\\V1\\Rpc\\Request\\Controller',
-                        'action' => 'request',
+                        'controller' => 'Api\\V1\\Rpc\\Hermes\\Controller',
+                        'action' => 'hermes',
+                    ),
+                ),
+            ),
+            'api.rpc.artemis' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/artemis',
+                    'defaults' => array(
+                        'controller' => 'Api\\V1\\Rpc\\Artemis\\Controller',
+                        'action' => 'artemis',
                     ),
                 ),
             ),
@@ -19,23 +29,34 @@ return array(
     ),
     'zf-versioning' => array(
         'uri' => array(
-            1 => 'api.rpc.request',
+            1 => 'api.rpc.hermes',
+            0 => 'api.rpc.artemis',
         ),
     ),
     'zf-rest' => array(),
     'zf-content-negotiation' => array(
         'controllers' => array(
-            'Api\\V1\\Rpc\\Request\\Controller' => 'Json',
+            'Api\\V1\\Rpc\\Hermes\\Controller' => 'Json',
+            'Api\\V1\\Rpc\\Artemis\\Controller' => 'Json',
         ),
         'accept_whitelist' => array(
-            'Api\\V1\\Rpc\\Request\\Controller' => array(
+            'Api\\V1\\Rpc\\Hermes\\Controller' => array(
+                0 => 'application/vnd.api.v1+json',
+                1 => 'application/json',
+                2 => 'application/*+json',
+            ),
+            'Api\\V1\\Rpc\\Artemis\\Controller' => array(
                 0 => 'application/vnd.api.v1+json',
                 1 => 'application/json',
                 2 => 'application/*+json',
             ),
         ),
         'content_type_whitelist' => array(
-            'Api\\V1\\Rpc\\Request\\Controller' => array(
+            'Api\\V1\\Rpc\\Hermes\\Controller' => array(
+                0 => 'application/vnd.api.v1+json',
+                1 => 'application/json',
+            ),
+            'Api\\V1\\Rpc\\Artemis\\Controller' => array(
                 0 => 'application/vnd.api.v1+json',
                 1 => 'application/json',
             ),
@@ -45,8 +66,8 @@ return array(
         'metadata_map' => array(),
     ),
     'zf-content-validation' => array(
-        'Api\\V1\\Rpc\\Request\\Controller' => array(
-            'input_filter' => 'Api\\V1\\Rpc\\Request\\Validator',
+        'Api\\V1\\Rpc\\Hermes\\Controller' => array(
+            'input_filter' => 'Api\\V1\\Rpc\\Hermes\\Validator',
         ),
     ),
     'input_filter_specs' => array(
@@ -233,7 +254,7 @@ return array(
                 'description' => 'Service uri',
             ),
         ),
-        'Api\\V1\\Rpc\\Request\\Validator' => array(
+        'Api\\V1\\Rpc\\Hermes\\Validator' => array(
             0 => array(
                 'required' => false,
                 'validators' => array(),
@@ -330,16 +351,24 @@ return array(
     ),
     'controllers' => array(
         'factories' => array(
-            'Api\\V1\\Rpc\\Request\\Controller' => 'Api\\V1\\Rpc\\Request\\RequestControllerFactory',
+            'Api\\V1\\Rpc\\Hermes\\Controller' => 'Api\\V1\\Rpc\\Hermes\\HermesControllerFactory',
+            'Api\\V1\\Rpc\\Artemis\\Controller' => 'Api\\V1\\Rpc\\Artemis\\ArtemisControllerFactory',
         ),
     ),
     'zf-rpc' => array(
-        'Api\\V1\\Rpc\\Request\\Controller' => array(
-            'service_name' => 'Request',
+        'Api\\V1\\Rpc\\Hermes\\Controller' => array(
+            'service_name' => 'Hermes',
             'http_methods' => array(
                 0 => 'POST',
             ),
-            'route_name' => 'api.rpc.request',
+            'route_name' => 'api.rpc.hermes',
+        ),
+        'Api\\V1\\Rpc\\Artemis\\Controller' => array(
+            'service_name' => 'Artemis',
+            'http_methods' => array(
+                0 => 'POST',
+            ),
+            'route_name' => 'api.rpc.artemis',
         ),
     ),
 );

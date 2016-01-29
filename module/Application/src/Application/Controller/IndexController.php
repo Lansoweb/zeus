@@ -20,9 +20,10 @@ class IndexController extends AbstractActionController
     private function fetchData()
     {
         $table = new TableGateway('access',$this->getServiceLocator()->get('ApiDB'));
-        $ret = $table->select([
-            'date' => null,
-        ]);
+        $ret = $table->select(function (Select $select) {
+            $select->where->isNull('date');
+            $select->order('source ASC');
+        });
         $nodes = [];
         $edges = [];
         $maxCounter = 0;
@@ -79,7 +80,7 @@ class IndexController extends AbstractActionController
     {
         $id = $this->params('id');
 
-        $table = new TableGateway('request',$this->getServiceLocator()->get('ApiDB'));
+        $table = new TableGateway('hermes',$this->getServiceLocator()->get('ApiDB'));
         $ret = $table->select(function (Select $select) use ($id) {
             $select->where->equalTo('id', $id);
             $select->order('depth ASC');
