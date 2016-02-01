@@ -1,0 +1,31 @@
+<h5>Title</h5>
+<pre><?= $this->detail->title ?></pre>
+<h5>Trace</h5>
+<pre><?php
+$trace = json_decode($this->detail->trace, true, 100);
+$i=1;
+foreach ($trace['frames'] as $frame) {
+    $filename = htmlentities($frame['filename']);
+    echo "$i: File \"{$filename}\" line {$frame['lineno']}";
+    if (isset($frame['method'])) {
+        echo " in {$frame['method']}";
+    }
+    echo "\n";
+    $i++;
+}
+?></pre>
+<h5>Occurrences</h5>
+<table>
+	<tr>
+		<th>Date</th>
+		<th>Method</th>
+		<th>Url</th>
+	</tr>
+	<?php foreach ($this->occurrences as $item): ?>
+    	<tr>
+    		<th><a href="<?= $this->url('artemis/occurrence', ['project' => $this->project,'id' => $item->id]) ?>"><?= $item->date ?></a></th>
+    		<th><?= $item->method ?></th>
+    		<th><?= json_decode($item->request, true, 100)['url'] ?></th>
+    	</tr>
+	<?php endforeach; ?>
+</table>

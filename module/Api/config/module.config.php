@@ -8,7 +8,7 @@ return array(
             'api.rpc.hermes' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/hermes',
+                    'route' => '/hermes/collect',
                     'defaults' => array(
                         'controller' => 'Api\\V1\\Rpc\\Hermes\\Controller',
                         'action' => 'hermes',
@@ -18,7 +18,7 @@ return array(
             'api.rpc.artemis' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/artemis',
+                    'route' => '/artemis/collect',
                     'defaults' => array(
                         'controller' => 'Api\\V1\\Rpc\\Artemis\\Controller',
                         'action' => 'artemis',

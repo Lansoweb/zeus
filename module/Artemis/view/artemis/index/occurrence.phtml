@@ -1,0 +1,46 @@
+<h5>Title</h5>
+<pre><?= $this->detail->title ?></pre>
+<h5>Trace</h5>
+<pre><?php
+$trace = json_decode($this->detail->trace, true, 100);
+$i=1;
+foreach ($trace['frames'] as $frame) {
+    $filename = htmlentities($frame['filename']);
+    echo "$i: File \"{$filename}\" line {$frame['lineno']}";
+    if (isset($frame['method'])) {
+        echo " in {$frame['method']}";
+    }
+    echo "\n";
+    $i++;
+}
+?></pre>
+
+<?php
+$request = json_decode($this->occurrence['request'], true, 100);
+if ($request && array_key_exists('headers', $request)) {
+echo '<h4>Headers</h4>
+<table>';
+$headers = json_decode($this->occurrence['request'], true, 100)['headers'];
+foreach ($headers as $header => $value) {
+    echo "<tr><th>$header</th><td>$value</td>";
+}
+?>
+</table>
+<?php }
+
+if ($request && array_key_exists('BODY', $request)) {
+?>
+<h4>Data</h4>
+<table>
+<?php
+$headers = json_decode($this->occurrence['request'], true, 100)['BODY'];
+foreach ($headers as $header => $value) {
+    echo "<tr><th>$header</th><td>$value</td>";
+}
+?>
+</table>
+<?php } ?>
+<br>
+<br>
+<br>
+<br>

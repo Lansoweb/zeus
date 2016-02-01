@@ -1,0 +1,14 @@
+<table>
+	<tr>
+		<th>Date</th>
+		<th>Occurrences</th>
+		<th>Title</th>
+	</tr>
+	<?php foreach ($this->list as $item): ?>
+    	<tr>
+    		<th><a href="<?= $this->url('artemis/detail', ['project' => $this->project,'id' => $item->id]) ?>"><?= $item->last_seen ?></a></th>
+    		<th><?= $item->counter ?></th>
+    		<th>#<?= $item->id . ': '. $item->title ?></th>
+    	</tr>
+	<?php endforeach; ?>
+</table>

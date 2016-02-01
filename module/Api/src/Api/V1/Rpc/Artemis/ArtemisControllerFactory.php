@@ -7,7 +7,6 @@ class ArtemisControllerFactory
 {
     public function __invoke($controllers)
     {
-        $tableGateway = new TableGateway('artemis',$controllers->getServiceLocator()->get('ApiDB'));
-        return new ArtemisController($tableGateway);
+        return new ArtemisController($controllers->getServiceLocator()->get('ApiDB'));
     }
 }

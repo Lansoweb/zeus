@@ -7,14 +7,16 @@ use ZF\ApiProblem\ApiProblemResponse;
 use ZF\ApiProblem\ApiProblem;
 use Ramsey\Uuid\Uuid;
 use ZF\ContentNegotiation\ViewModel;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Expression;
 
 class ArtemisController extends AbstractActionController
 {
-    private $table;
+    private $adapter;
 
-    public function __construct(TableGateway $table)
+    public function __construct(Adapter $adapter)
     {
-        $this->table = $table;
+        $this->adapter = $adapter;
     }
 
     public function artemisAction()
@@ -28,28 +30,50 @@ class ArtemisController extends AbstractActionController
             return new ApiProblemResponse(new ApiProblem(422, 'Missing body/request keys'));
         }
 
-        if (isset($params['time'])) {
-            $date = $params['time'];
-        } else {
-            $date = microtime(true);
-        }
+        $date = isset($params['time']) ? $params['time'] : microtime(true);
         $date = \DateTime::createFromFormat('U.u', $date);
+
+        $project = isset($params['api_key']) ? $params['api_key'] : null;
+
+        $title = $params['body']['trace']['exception']['class'] .': '. $params['body']['trace']['exception']['message'];
+        $trace = json_encode($params['body']['trace'], null, 100);
+
+        $table = new TableGateway('artemis',$this->adapter);
+        $ret = $table->select([
+            'title' => $title,
+            'project' => $project,
+        ]);
+
+        if ($ret->count() == 0) {
+            $table->insert([
+                'title' => $title,
+                'project' => $project,
+            ]);
+
+            $id = $table->getLastInsertValue();
+        } else {
+            $id = $ret->current()['id'];
+        }
+
+        $table->update([
+            'counter' => new Expression('counter + 1'),
+            'trace' => $trace,
+            'last_seen' => $date->format('Y-m-d H:i:s.u'),
+        ], ['id' => $id]);
 
         $data = [
             'id' => Uuid::uuid4(),
+            'artemis_id' => $id,
             'date' => $date->format('Y-m-d H:i:s.u'),
-            'file' => $params['body']['trace']['frames'][0]['filename'],
-            'lineno' => $params['body']['trace']['frames'][0]['lineno'],
-            'exception' => $params['body']['trace']['exception']['class'],
-            'body' => json_encode($params['body'], null, 100),
+            'exception' => json_encode($params['body']['trace']['exception'], null, 100),
             'method' => $params['request']['method'] ?? 'GET',
             'server' => json_encode($params['server'] ?? null, null, 100),
             'user' => $params['user'] ?? null,
-            'trace' => json_encode($params['trace'] ?? null, null, 100),
             'request' => json_encode($params['request'] ?? null, null, 100),
         ];
 
-        $ret = $this->table->insert($data);
+        $table = new TableGateway('artemis_occurrences',$this->adapter);
+        $ret = $table->insert($data);
 
         if (!$ret) {
             throw new \DomainException('Insert operation failed or did not result in new row', 500);
