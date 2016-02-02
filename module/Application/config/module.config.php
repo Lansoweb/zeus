@@ -12,39 +12,13 @@ return array(
                     ),
                 ),
             ),
-            'cose' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route'    => '/cose',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'cose',
-                    ),
-                ),
-            ),
-            'circle' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route'    => '/circle',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'circle',
-                    ),
-                ),
-            ),
-            'request-view' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route'    => '/view/request/:id',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'request',
-                    ),
-                ),
-            ),
         ),
     ),
     'service_manager' => array(
+        'factories' => array(
+            'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+        ),
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Db\Adapter\AdapterAbstractServiceFactory',
@@ -72,4 +46,25 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    'view_helpers' => [
+        'invokables' => [
+            'select_project' => 'Application\View\Helper\SelectProject',
+        ],
+    ],
+    'navigation' => array(
+        'default' => array(
+            'hermes' => array(
+                'label' => 'Requests',
+                'uri' => '/hermes'
+            ),
+            'artemis' => array(
+                'label' => 'Errors',
+                'uri' => '/artemis',
+            ),
+            'lachesis' => array(
+                'label' => 'Database',
+                'uri' => '/lachesis'
+            )
+        )
+    )
 );

@@ -40,6 +40,7 @@ return array(
                             'defaults' => array(
                                 'controller' => 'Hermes\Controller\Index',
                                 'action'     => 'request',
+                                'id' => 0,
                             ),
                         ),
                     ),
@@ -57,4 +58,36 @@ return array(
             'Hermes' => __DIR__.'/../view',
         ),
     ),
+    'navigation' => array(
+        'default' => array(
+            'hermes' => array(
+                'pages' => array(
+                    'cose' => array(
+                        'label' => 'Cose Graph',
+                        'id' => 'cose',
+                        'route' => 'hermes/cose',
+                    ),
+                    'circle' => array(
+                        'label' => 'Circle Graph',
+                        'id' => 'circle',
+                        'route' => 'hermes/circle',
+                    ),
+                    'request' => array(
+                        'label' => 'Detail Request',
+                        'id' => 'detail',
+                        'use_route_match' => true,
+                        'route' => 'hermes',
+                        'pages' => [
+                            'detail' => array(
+                                'label' => 'Detail Request',
+                                'id' => 'detail',
+                                'use_route_match' => true,
+                                'route' => 'hermes/detail',
+                            ),
+                        ]
+                    )
+                )
+            )
+        )
+    )
 );

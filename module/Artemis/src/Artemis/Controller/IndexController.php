@@ -11,11 +11,15 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $project = $this->params('project');
+        $project = $this->params('project', 0);
 
         $table = new TableGateway('artemis',$this->getServiceLocator()->get('ApiDB'));
         $ret = $table->select(function (Select $select) use ($project) {
-            $select->where(['project' => $project]);
+            $filter = $project;
+            if ($project === 0) {
+                $filter = null;
+            }
+            $select->where(['project' => $filter]);
             $select->order('last_seen DESC');
             $select->limit(20);
         });
@@ -27,7 +31,7 @@ class IndexController extends AbstractActionController
 
     public function detailAction()
     {
-        $project = $this->params('project');
+        $project = $this->params('project', 0);
         $id = $this->params('id');
 
         $table = new TableGateway('artemis',$this->getServiceLocator()->get('ApiDB'));

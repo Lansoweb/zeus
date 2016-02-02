@@ -19,7 +19,7 @@ foreach ($trace['frames'] as $frame) {
 $request = json_decode($this->occurrence['request'], true, 100);
 if ($request && array_key_exists('headers', $request)) {
 echo '<h4>Headers</h4>
-<table>';
+<table class="table table-striped">';
 $headers = json_decode($this->occurrence['request'], true, 100)['headers'];
 foreach ($headers as $header => $value) {
     echo "<tr><th>$header</th><td>$value</td>";
@@ -31,7 +31,7 @@ foreach ($headers as $header => $value) {
 if ($request && array_key_exists('BODY', $request)) {
 ?>
 <h4>Data</h4>
-<table>
+<table class="table table-striped">
 <?php
 $headers = json_decode($this->occurrence['request'], true, 100)['BODY'];
 foreach ($headers as $header => $value) {

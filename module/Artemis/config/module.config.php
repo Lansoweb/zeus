@@ -5,7 +5,7 @@ return array(
             'artemis' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/artemis/:project',
+                    'route'    => '/artemis[/:project]',
                     'defaults' => array(
                         'controller' => 'Artemis\Controller\Index',
                         'action'     => 'index',
@@ -20,6 +20,7 @@ return array(
                             'defaults' => array(
                                 'controller' => 'Artemis\Controller\Index',
                                 'action'     => 'detail',
+                                'id' => 0,
                             ),
                         ),
                     ),
@@ -30,6 +31,7 @@ return array(
                             'defaults' => array(
                                 'controller' => 'Artemis\Controller\Index',
                                 'action'     => 'occurrence',
+                                'id' => 0,
                             ),
                         ),
                     ),

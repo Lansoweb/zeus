@@ -17,6 +17,7 @@ return array(
     'ZF\\Rest',
     'ZF\\Rpc',
     'ZF\\Versioning',
+    'LosUi',
     'Artemis',
     'Hermes',
     'Api',

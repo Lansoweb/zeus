@@ -48,6 +48,7 @@ class ArtemisController extends AbstractActionController
             $table->insert([
                 'title' => $title,
                 'project' => $project,
+                'counter' => 0,
             ]);
 
             $id = $table->getLastInsertValue();

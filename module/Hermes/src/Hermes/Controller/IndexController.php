@@ -6,9 +6,58 @@ use Zend\View\Model\ViewModel;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;
+use Zend\Form\Form;
 
 class IndexController extends AbstractActionController
 {
+    public function indexAction()
+    {
+        $form = $this->getSearchForm();
+
+        if (!$this->getRequest()->isPost()) {
+            return [
+                'form' => $form,
+            ];
+        }
+
+        $data = $this->getRequest()->getPost();
+
+        $form->setData($data);
+
+        /*
+        if (!$form->isValid()) {
+            return [
+                'form' => $form,
+            ];
+        }*/
+        return $this->redirect()->toRoute('hermes/request-view', ['id' => $form->get('request')->getValue()]);
+    }
+
+    private function getSearchForm()
+    {
+        $form = new Form();
+        $form->add([
+            'name' => 'request',
+            'options' => array(
+                'label' => 'Request Id',
+            ),
+            'attributes' => [
+                'placeholder' => 'Request Id',
+            ],
+            'type'  => 'Text',
+        ]);
+        $form->add([
+            'name' => 'submit',
+            'type'  => 'Submit',
+            'attributes' => array(
+                'value' => 'Submit',
+                'class' => 'btn btn-primary',
+            ),
+        ]);
+
+        return $form;
+    }
+
     private function fetchData()
     {
         $table = new TableGateway('access',$this->getServiceLocator()->get('ApiDB'));
