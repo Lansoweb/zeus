@@ -6,9 +6,9 @@
 	</tr>
 	<?php foreach ($this->list as $item): ?>
     	<tr>
-    		<th><a href="<?= $this->url('lachesis/detail', ['project' => $this->project,'id' => $item->id]) ?>"><?= $item->start ?></a></th>
-    		<th><?= $item->sql ?></th>
-    		<th><?= $item->elapsed ?>ms</th>
+    		<td style="white-space: nowrap;"><a href="<?= $this->url('lachesis/detail', ['project' => $this->project,'id' => $item->id]) ?>"><?= $item->start ?></a></td>
+    		<td><?= $item->sql ?></td>
+    		<td style="white-space: nowrap;"><?= $item->elapsed / 1000 ?> ms</td>
     	</tr>
 	<?php endforeach; ?>
 </table>

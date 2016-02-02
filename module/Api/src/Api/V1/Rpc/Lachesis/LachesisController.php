@@ -33,8 +33,6 @@ class LachesisController extends AbstractActionController
             $start = \DateTime::createFromFormat('U.u', $params['start']);
             $end = \DateTime::createFromFormat('U.u', $params['end']);
 
-            $project = isset($params['api_key']) ? $params['api_key'] : null;
-
             $trace = json_encode($params['stack'], null, 100);
 
             $table = new TableGateway('lachesis',$this->adapter);
@@ -47,7 +45,8 @@ class LachesisController extends AbstractActionController
                 'type' => $params['type'],
                 'elapsed' => $params['elapsed'],
                 'sql' => $params['sql'],
-                'project' => $project,
+                'project' => $params['api_key'] ?? null,
+                'request_id' => $params['request_id'] ?? null,
                 'parameters' => json_encode($params['parameters'] ?? null, null, 100),
             ];
 
