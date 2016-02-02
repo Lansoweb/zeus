@@ -20,5 +20,6 @@ return array(
     'LosUi',
     'Artemis',
     'Hermes',
+    'Lachesis',
     'Api',
 );

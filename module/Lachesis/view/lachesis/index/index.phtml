@@ -1,0 +1,14 @@
+<table class="table table-striped">
+	<tr>
+		<th>Date</th>
+		<th>Sql</th>
+		<th>Elapsed</th>
+	</tr>
+	<?php foreach ($this->list as $item): ?>
+    	<tr>
+    		<th><a href="<?= $this->url('lachesis/detail', ['project' => $this->project,'id' => $item->id]) ?>"><?= $item->start ?></a></th>
+    		<th><?= $item->sql ?></th>
+    		<th><?= $item->elapsed ?>ms</th>
+    	</tr>
+	<?php endforeach; ?>
+</table>

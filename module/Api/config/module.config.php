@@ -25,12 +25,23 @@ return array(
                     ),
                 ),
             ),
+            'api.rpc.lachesis' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/lachesis/collect',
+                    'defaults' => array(
+                        'controller' => 'Api\\V1\\Rpc\\Lachesis\\Controller',
+                        'action' => 'lachesis',
+                    ),
+                ),
+            ),
         ),
     ),
     'zf-versioning' => array(
         'uri' => array(
             1 => 'api.rpc.hermes',
             0 => 'api.rpc.artemis',
+            2 => 'api.rpc.lachesis',
         ),
     ),
     'zf-rest' => array(),
@@ -38,6 +49,7 @@ return array(
         'controllers' => array(
             'Api\\V1\\Rpc\\Hermes\\Controller' => 'Json',
             'Api\\V1\\Rpc\\Artemis\\Controller' => 'Json',
+            'Api\\V1\\Rpc\\Lachesis\\Controller' => 'Json',
         ),
         'accept_whitelist' => array(
             'Api\\V1\\Rpc\\Hermes\\Controller' => array(
@@ -50,6 +62,11 @@ return array(
                 1 => 'application/json',
                 2 => 'application/*+json',
             ),
+            'Api\\V1\\Rpc\\Lachesis\\Controller' => array(
+                0 => 'application/vnd.api.v1+json',
+                1 => 'application/json',
+                2 => 'application/*+json',
+            ),
         ),
         'content_type_whitelist' => array(
             'Api\\V1\\Rpc\\Hermes\\Controller' => array(
@@ -57,6 +74,10 @@ return array(
                 1 => 'application/json',
             ),
             'Api\\V1\\Rpc\\Artemis\\Controller' => array(
+                0 => 'application/vnd.api.v1+json',
+                1 => 'application/json',
+            ),
+            'Api\\V1\\Rpc\\Lachesis\\Controller' => array(
                 0 => 'application/vnd.api.v1+json',
                 1 => 'application/json',
             ),
@@ -353,6 +374,7 @@ return array(
         'factories' => array(
             'Api\\V1\\Rpc\\Hermes\\Controller' => 'Api\\V1\\Rpc\\Hermes\\HermesControllerFactory',
             'Api\\V1\\Rpc\\Artemis\\Controller' => 'Api\\V1\\Rpc\\Artemis\\ArtemisControllerFactory',
+            'Api\\V1\\Rpc\\Lachesis\\Controller' => 'Api\\V1\\Rpc\\Lachesis\\LachesisControllerFactory',
         ),
     ),
     'zf-rpc' => array(
@@ -369,6 +391,13 @@ return array(
                 0 => 'POST',
             ),
             'route_name' => 'api.rpc.artemis',
+        ),
+        'Api\\V1\\Rpc\\Lachesis\\Controller' => array(
+            'service_name' => 'Lachesis',
+            'http_methods' => array(
+                0 => 'POST',
+            ),
+            'route_name' => 'api.rpc.lachesis',
         ),
     ),
 );

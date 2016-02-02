@@ -1,0 +1,28 @@
+<table class="table table-striped">
+	<tr><th>Sql</th><td><?= $this->detail->sql ?></td></tr>
+	<tr><th>Parameters</th><td><?= $this->detail->parameters ?></td></tr>
+	<tr><th>Type</th><td><?= $this->detail->type ?></td></tr>
+	<tr><th>Start</th><td><?= $this->detail->start ?></td></tr>
+	<tr><th>End</th><td><?= $this->detail->end ?></td></tr>
+	<tr><th>Elapsed</th><td><?= $this->detail->elapsed ?>ms</td></tr>
+</table>
+<h5>Trace</h5>
+<pre><?php
+$trace = json_decode($this->detail->trace, true, 100);
+$i=1;
+foreach ($trace as $frame) {
+    echo "$i:";
+    if (isset($frame['class'])) {
+        echo " {$frame['class']}";
+    }
+    if (isset($frame['file'])) {
+        $file = htmlentities($frame['file']);
+        echo " file {$file} line {$frame['line']}";
+    }
+    if (isset($frame['method'])) {
+        echo " in {$frame['method']}";
+    }
+    echo "\n";
+    $i++;
+}
+?></pre>
