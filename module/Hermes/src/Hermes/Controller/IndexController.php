@@ -155,10 +155,26 @@ class IndexController extends AbstractActionController
             ];
         }
 
+        $table = new TableGateway('lachesis',$this->getServiceLocator()->get('ApiDB'));
+        $lachesis = $table->select(function (Select $select) use ($id) {
+            $select->where->equalTo('request_id', $id);
+            $select->order('start ASC');
+        });
+
+        $table = new TableGateway('artemis_occurrences',$this->getServiceLocator()->get('ApiDB'));
+
+        $sqlSelect = $table->getSql()->select();
+        $sqlSelect->columns(['date']);
+        $sqlSelect->join('artemis', 'artemis.id = artemis_occurrences.artemis_id', ['title']);
+        $sqlSelect->where(['artemis_occurrences.request_id' => $id]);
+        $artemis = $table->selectWith($sqlSelect);
+
         return [
             'nodes' => $nodes,
             'edges' => $edges,
             'max' => $maxCounter,
+            'artemis' => $artemis,
+            'lachesis' => $lachesis,
         ];
     }
 }

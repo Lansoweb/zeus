@@ -35,7 +35,11 @@ class ArtemisController extends AbstractActionController
 
         $project = isset($params['api_key']) ? $params['api_key'] : null;
 
-        $title = $params['body']['trace']['exception']['class'] .': '. $params['body']['trace']['exception']['message'];
+        if (isset($params['body']['trace']['exception']['message'])) {
+            $title = $params['body']['trace']['exception']['class'] .': '. $params['body']['trace']['exception']['message'];
+        } else {
+            $title = $params['body']['trace']['exception']['class'];
+        }
         $trace = json_encode($params['body']['trace'], null, 100);
 
         $table = new TableGateway('artemis',$this->adapter);
@@ -62,6 +66,11 @@ class ArtemisController extends AbstractActionController
             'last_seen' => $date->format('Y-m-d H:i:s.u'),
         ], ['id' => $id]);
 
+        $requestId = null;
+        if (isset($params['request']['headers']['X-Request-Id'])) {
+            $requestId = $params['request']['headers']['X-Request-Id'];
+        }
+
         $data = [
             'id' => Uuid::uuid4(),
             'artemis_id' => $id,
@@ -71,6 +80,7 @@ class ArtemisController extends AbstractActionController
             'server' => json_encode($params['server'] ?? null, null, 100),
             'user' => $params['user'] ?? null,
             'request' => json_encode($params['request'] ?? null, null, 100),
+            'request_id' => $requestId,
         ];
 
         $table = new TableGateway('artemis_occurrences',$this->adapter);
