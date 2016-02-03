@@ -153,25 +153,25 @@ $this->losHeadscript()->appendFile('/js/cytoscape/cytoscape-dagre.js');
 
 <div class="row">
 	<div class="col-xs-12 col-md-8">
-		<?php if (count($this->lachesis)) : ?>
 		<table class="table table-striped">
 			<tr><th colspan=2 class="text-center">Database</th></tr>
 			<tr><th>Data</th><th>Sql</th></tr>
+		<?php if (count($this->lachesis)) : ?>
 			<?php foreach ($this->lachesis as $lachesis) : ?>
 				<tr><td><?= $lachesis['start'] ?></td><td><?= $lachesis['sql'] ?></td></tr>
 			<?php endforeach; ?>
-		</table>
 		<?php endif ?>
+		</table>
 
-		<?php if (count($this->artemis)) : ?>
 		<table class="table table-striped">
 			<tr><th colspan=2 class="text-center">Errors</th></tr>
 			<tr><th>Data</th><th>Title</th></tr>
+		<?php if (count($this->artemis)) : ?>
 			<?php foreach ($this->artemis as $artemis) : ?>
 				<tr><td><?= $artemis['date'] ?></td><td><?= $artemis['title'] ?></td></tr>
 			<?php endforeach; ?>
-		</table>
 		<?php endif ?>
+		</table>
 	</div>
 	<div id="cy" class="col-xs-12 col-md-4">&nbsp;</div>
 </div>

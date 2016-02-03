@@ -65,6 +65,7 @@ class HermesController extends AbstractActionController
             'destination_service' => $params['destination']['service'],
             'destination_server' => $params['destination']['server'],
             'destination_uri' => $params['destination']['uri'],
+            'project' => isset($params['project']) ? $params['project'] : null,
         ];
 
         $ret = $this->table->insert($data);

@@ -24,6 +24,11 @@ class SelectProject extends AbstractHelper
         $routeMatch = $sm->get('Application')->getMvcEvent()->getRouteMatch();
         $selected = $routeMatch->getParam('project',0);
 
+        $newRoute = null;
+        if ($routeMatch->getMatchedRouteName() == 'home') {
+            $newRoute = 'zeus';
+        }
+
         $selectedName = 'Select a project';
         foreach ($projects as $name => $id) {
             if ($id == $selected) {
@@ -37,7 +42,7 @@ class SelectProject extends AbstractHelper
                 <ul class="dropdown-menu" role="menu">
 EOF;
         foreach ($projects as $name => $id) {
-            $ret .= '<li'.($id == $selected ? ' class="active"' : '').'><a href="'.$urlHelper(null, ['project' => $id]).'">'.$name.'</a></li>';
+            $ret .= '<li'.($id == $selected ? ' class="active"' : '').'><a href="'.$urlHelper($newRoute, ['project' => $id]).'">'.$name.'</a></li>';
         }
         $ret .= '</ul></li>';
 

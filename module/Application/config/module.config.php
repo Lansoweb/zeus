@@ -12,6 +12,18 @@ return array(
                     ),
                 ),
             ),
+            'zeus' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/:project',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'index',
+                        'project' => 0,
+                    ),
+                ),
+                'may_terminate' => true,
+            ),
         ),
     ),
     'service_manager' => array(
@@ -55,15 +67,18 @@ return array(
         'default' => array(
             'hermes' => array(
                 'label' => 'Requests',
-                'uri' => '/hermes'
+                'route' => 'zeus/hermes',
+                'use_route_match' => true,
             ),
             'artemis' => array(
                 'label' => 'Errors',
-                'uri' => '/artemis',
+                'route' => 'zeus/artemis',
+                'use_route_match' => true,
             ),
             'lachesis' => array(
                 'label' => 'Database',
-                'uri' => '/lachesis'
+                'route' => 'zeus/lachesis',
+                'use_route_match' => true,
             )
         )
     )

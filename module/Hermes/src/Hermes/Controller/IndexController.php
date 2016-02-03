@@ -30,7 +30,9 @@ class IndexController extends AbstractActionController
                 'form' => $form,
             ];
         }*/
-        return $this->redirect()->toRoute('hermes/request-view', ['id' => $form->get('request')->getValue()]);
+        $project = $this->params('project', 0);
+
+        return $this->redirect()->toRoute('zeus/hermes/request-view', ['project' => $project, 'id' => $form->get('request')->getValue()]);
     }
 
     private function getSearchForm()
@@ -60,9 +62,12 @@ class IndexController extends AbstractActionController
 
     private function fetchData()
     {
+        $project = $this->params('project', 0);
+
         $table = new TableGateway('access',$this->getServiceLocator()->get('ApiDB'));
-        $ret = $table->select(function (Select $select) {
+        $ret = $table->select(function (Select $select) use ($project) {
             $select->where->isNull('date');
+            $select->where->equalTo('project', $project);
             $select->order('source ASC');
         });
         $nodes = [];
@@ -120,10 +125,12 @@ class IndexController extends AbstractActionController
     public function requestAction()
     {
         $id = $this->params('id');
+        $project = $this->params('project', 0);
 
         $table = new TableGateway('hermes',$this->getServiceLocator()->get('ApiDB'));
-        $ret = $table->select(function (Select $select) use ($id) {
+        $ret = $table->select(function (Select $select) use ($id, $project) {
             $select->where->equalTo('id', $id);
+            $select->where->equalTo('project', $project);
             $select->order('depth ASC');
             $select->order('date ASC');
         });

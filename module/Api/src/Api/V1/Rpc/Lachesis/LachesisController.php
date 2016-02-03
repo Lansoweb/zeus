@@ -50,6 +50,10 @@ class LachesisController extends AbstractActionController
                 'parameters' => json_encode($params['parameters'] ?? null, null, 100),
             ];
 
+            if (isset($params['project']) && !empty($params['project'])) {
+                $data['project'] = $params['project'];
+            }
+
             $table = new TableGateway('lachesis',$this->adapter);
             $ret = $table->insert($data);
 

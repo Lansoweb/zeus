@@ -6,7 +6,7 @@
 	</tr>
 	<?php foreach ($this->list as $item): ?>
     	<tr>
-    		<th><a href="<?= $this->url('artemis/detail', ['project' => $this->project,'id' => $item->id]) ?>"><?= $item->last_seen ?></a></th>
+    		<th><a href="<?= $this->url('zeus/artemis/detail', ['project' => $this->project,'id' => $item->id]) ?>"><?= $item->last_seen ?></a></th>
     		<th><?= $item->counter ?></th>
     		<th>#<?= $item->id . ': '. $item->title ?></th>
     	</tr>

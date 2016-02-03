@@ -23,7 +23,7 @@ foreach ($trace['frames'] as $frame) {
 	</tr>
 	<?php foreach ($this->occurrences as $item): ?>
     	<tr>
-    		<th><a href="<?= $this->url('artemis/occurrence', ['project' => $this->project,'id' => $item->id]) ?>"><?= $item->date ?></a></th>
+    		<th><a href="<?= $this->url('zeus/artemis/occurrence', ['project' => $this->project,'id' => $item->id]) ?>"><?= $item->date ?></a></th>
     		<th><?= $item->method ?></th>
     		<th><?= json_decode($item->request, true, 100)['url'] ?></th>
     	</tr>

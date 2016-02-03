@@ -2,47 +2,51 @@
 return array(
     'router' => array(
         'routes' => array(
-            'hermes' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route'    => '/hermes',
-                    'defaults' => array(
-                        'controller' => 'Hermes\Controller\Index',
-                        'action'     => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
+            'zeus' => array(
                 'child_routes' => [
-                    'cose' => array(
+                    'hermes' => array(
                         'type' => 'Literal',
                         'options' => array(
-                            'route'    => '/cose',
+                            'route'    => '/hermes',
                             'defaults' => array(
                                 'controller' => 'Hermes\Controller\Index',
-                                'action'     => 'cose',
+                                'action'     => 'index',
                             ),
                         ),
-                    ),
-                    'circle' => array(
-                        'type' => 'Literal',
-                        'options' => array(
-                            'route'    => '/circle',
-                            'defaults' => array(
-                                'controller' => 'Hermes\Controller\Index',
-                                'action'     => 'circle',
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'cose' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route'    => '/cose',
+                                    'defaults' => array(
+                                        'controller' => 'Hermes\Controller\Index',
+                                        'action'     => 'cose',
+                                    ),
+                                ),
                             ),
-                        ),
-                    ),
-                    'request-view' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route'    => '/request/:id',
-                            'defaults' => array(
-                                'controller' => 'Hermes\Controller\Index',
-                                'action'     => 'request',
-                                'id' => 0,
+                            'circle' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route'    => '/circle',
+                                    'defaults' => array(
+                                        'controller' => 'Hermes\Controller\Index',
+                                        'action'     => 'circle',
+                                    ),
+                                ),
                             ),
-                        ),
+                            'request-view' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route'    => '/request/:id',
+                                    'defaults' => array(
+                                        'controller' => 'Hermes\Controller\Index',
+                                        'action'     => 'request',
+                                        'id' => 0,
+                                    ),
+                                ),
+                            ),
+                        ],
                     ),
                 ],
             ),
@@ -65,24 +69,26 @@ return array(
                     'cose' => array(
                         'label' => 'Cose Graph',
                         'id' => 'cose',
-                        'route' => 'hermes/cose',
+                        'route' => 'zeus/hermes/cose',
+                        'use_route_match' => true,
                     ),
                     'circle' => array(
                         'label' => 'Circle Graph',
                         'id' => 'circle',
-                        'route' => 'hermes/circle',
+                        'route' => 'zeus/hermes/circle',
+                        'use_route_match' => true,
                     ),
                     'request' => array(
                         'label' => 'Detail Request',
                         'id' => 'detail',
                         'use_route_match' => true,
-                        'route' => 'hermes',
+                        'route' => 'zeus/hermes',
                         'pages' => [
                             'detail' => array(
                                 'label' => 'Detail Request',
                                 'id' => 'detail',
                                 'use_route_match' => true,
-                                'route' => 'hermes/detail',
+                                'route' => 'zeus/hermes/detail',
                             ),
                         ]
                     )

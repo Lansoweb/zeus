@@ -2,39 +2,42 @@
 return array(
     'router' => array(
         'routes' => array(
-            'lachesis' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route'    => '/lachesis[/:project]',
-                    'defaults' => array(
-                        'controller' => 'Lachesis\Controller\Index',
-                        'action'     => 'index',
-                        'project' => 0,
-                    ),
-                ),
-                'may_terminate' => true,
+            'zeus' => array(
                 'child_routes' => [
-                    'detail' => array(
+                    'lachesis' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route'    => '/detail/:id',
+                            'route'    => '/lachesis',
                             'defaults' => array(
                                 'controller' => 'Lachesis\Controller\Index',
-                                'action'     => 'detail',
-                                'id' => 0,
+                                'action'     => 'index',
                             ),
                         ),
-                    ),
-                    'occurrence' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route'    => '/occurrence/:id',
-                            'defaults' => array(
-                                'controller' => 'Lachesis\Controller\Index',
-                                'action'     => 'occurrence',
-                                'id' => 0,
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'detail' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route'    => '/detail/:id',
+                                    'defaults' => array(
+                                        'controller' => 'Lachesis\Controller\Index',
+                                        'action'     => 'detail',
+                                        'id' => 0,
+                                    ),
+                                ),
                             ),
-                        ),
+                            'occurrence' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route'    => '/occurrence/:id',
+                                    'defaults' => array(
+                                        'controller' => 'Lachesis\Controller\Index',
+                                        'action'     => 'occurrence',
+                                        'id' => 0,
+                                    ),
+                                ),
+                            ),
+                        ],
                     ),
                 ],
             ),
