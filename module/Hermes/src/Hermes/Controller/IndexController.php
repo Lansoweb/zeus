@@ -62,12 +62,16 @@ class IndexController extends AbstractActionController
 
     private function fetchData()
     {
-        $project = $this->params('project', 0);
+        $project = $this->params('project', '0');
 
         $table = new TableGateway('access',$this->getServiceLocator()->get('ApiDB'));
         $ret = $table->select(function (Select $select) use ($project) {
             $select->where->isNull('date');
-            $select->where->equalTo('project', $project);
+            if (empty($project)) {
+                $select->where->isNull('project');
+            } else {
+                $select->where->equalTo('project', $project);
+            }
             $select->order('source ASC');
         });
         $nodes = [];
@@ -125,12 +129,16 @@ class IndexController extends AbstractActionController
     public function requestAction()
     {
         $id = $this->params('id');
-        $project = $this->params('project', 0);
+        $project = $this->params('project', '0');
 
         $table = new TableGateway('hermes',$this->getServiceLocator()->get('ApiDB'));
         $ret = $table->select(function (Select $select) use ($id, $project) {
             $select->where->equalTo('id', $id);
-            $select->where->equalTo('project', $project);
+            if (empty($project)) {
+                $select->where->isNull('project');
+            } else {
+                $select->where->equalTo('project', $project);
+            }
             $select->order('depth ASC');
             $select->order('date ASC');
         });

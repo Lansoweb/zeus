@@ -1,7 +1,7 @@
 <?php
-$this->losHeadscript()->appendFile('/js/cytoscape/cytoscape.min.js');
-$this->losHeadscript()->appendFile('/js/dagre/dagre.min.js');
-$this->losHeadscript()->appendFile('/js/cytoscape/cytoscape-dagre.js');
+$this->losHeadscript()->appendFile($this->basepath('/js/cytoscape/cytoscape.min.js'));
+$this->losHeadscript()->appendFile($this->basepath('/js/dagre/dagre.min.js'));
+$this->losHeadscript()->appendFile($this->basepath('/js/cytoscape/cytoscape-dagre.js'));
 ?>
 <style>
       body {

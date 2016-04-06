@@ -5,7 +5,9 @@
 	<tr><th>Start</th><td><?= $this->detail->start ?></td></tr>
 	<tr><th>End</th><td><?= $this->detail->end ?></td></tr>
 	<tr><th>Elapsed</th><td><?= $this->detail->elapsed / 1000?> ms</td></tr>
-	<tr><th>Request</th><td><a href="<?= $this->url('zeus/hermes/request-view',['project'=>$this->project, 'id' => $this->detail->request_id]) ?>"><?= $this->detail->request_id ?></a></td></tr>
+	<?php if (!empty($this->detail->request_id)) :?>
+		<tr><th>Request</th><td><a href="<?= $this->url('zeus/hermes/request-view',['project'=>$this->project, 'id' => $this->detail->request_id]) ?>"><?= $this->detail->request_id ?></a></td></tr>
+	<?php endif ?>
 </table>
 <h5>Trace</h5>
 <pre><?php
