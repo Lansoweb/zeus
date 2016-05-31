@@ -15,11 +15,11 @@ class IndexController extends AbstractActionController
 
         $table = new TableGateway('lachesis',$this->getServiceLocator()->get('ApiDB'));
         $ret = $table->select(function (Select $select) use ($project) {
-            if (empty($project)) {
+            /*if (empty($project)) {
                 $select->where->isNull('project');
             } else {
                 $select->where(['project' => $project]);
-            }
+            }*/
             $select->order('start DESC');
             $select->limit(20);
         });

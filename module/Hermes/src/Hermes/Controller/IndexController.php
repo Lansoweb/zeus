@@ -67,11 +67,11 @@ class IndexController extends AbstractActionController
         $table = new TableGateway('access',$this->getServiceLocator()->get('ApiDB'));
         $ret = $table->select(function (Select $select) use ($project) {
             $select->where->isNull('date');
-            if (empty($project)) {
+            /*if (empty($project)) {
                 $select->where->isNull('project');
             } else {
                 $select->where->equalTo('project', $project);
-            }
+            }*/
             $select->order('source ASC');
         });
         $nodes = [];
@@ -134,11 +134,11 @@ class IndexController extends AbstractActionController
         $table = new TableGateway('hermes',$this->getServiceLocator()->get('ApiDB'));
         $ret = $table->select(function (Select $select) use ($id, $project) {
             $select->where->equalTo('id', $id);
-            if (empty($project)) {
+            /*if (empty($project)) {
                 $select->where->isNull('project');
             } else {
                 $select->where->equalTo('project', $project);
-            }
+            }*/
             $select->order('depth ASC');
             $select->order('date ASC');
         });
