@@ -1,0 +1,161 @@
+<?php
+$this->headscript()->appendFile('/js/cytoscape/cytoscape.min.js');
+?>
+<style>
+      body {
+        font-family: helvetica;
+        font-size: 14px;
+      }
+
+    #cy {
+        height: 90%;
+        position: absolute;
+        left: 0;
+        top: 70px;
+        z-index: 999;
+      }
+
+      h1 {
+        opacity: 0.5;
+        font-size: 1em;
+      }
+    </style>
+
+<script>
+      $(function(){
+
+        var cy = window.cy = cytoscape({
+          container: document.getElementById('cy'),
+
+          layout: {
+            name: 'cose',
+            idealEdgeLength: 100,
+            nodeOverlap: 20
+          },
+          style: [
+              {
+                  "selector":"core",
+                  "style":{
+                      "selection-box-color":"#AAD8FF",
+                      "selection-box-border-color":"#8BB0D0",
+                      "selection-box-opacity":"0.5"
+                          }
+              },
+              {
+                  "selector":"node",
+                  "style":{
+                      "width":"mapData(count, 0, <?= $this->data['max'] ?>, 30, 60)",
+                      "height":"mapData(count, 0, <?= $this->data['max'] ?>, 30, 60)",
+                      "content":"data(name)",
+                      "font-size":"12px",
+                      "text-valign":"center",
+                      "text-halign":"center",
+                      "background-color":"#555",
+                      "text-outline-color":"#555",
+                      "text-outline-width":"2px",
+                      "color":"#fff",
+                      "overlay-padding":"6px",
+                      "z-index":"10"
+                          }
+              },
+              {
+                  "selector":"node[name=\"admin\"]",
+                  "style":{
+                      "shape":"rectangle",
+                      "width":"50px",
+                      "height":"30px",
+                      "z-index":"1"
+                          }
+              },
+              {
+                  "selector":"node[name=\"cloud\"]",
+                  "style":{
+                      "shape":"rectangle",
+                      "width":"50px",
+                      "height":"30px",
+                      "z-index":"1"
+                          }
+              },
+              {
+                  "selector":"node[name=\"portal\"]",
+                  "style":{
+                      "shape":"rectangle",
+                      "width":"50px",
+                      "height":"30px",
+                      "z-index":"1"
+                          }
+              },
+              {
+                  "selector":"node:selected",
+                  "style":{
+                      "border-width":"6px",
+                      "border-color":"#AAD8FF",
+                      "border-opacity":"0.5",
+                      "background-color":"#77828C",
+                      "text-outline-color":"#77828C"
+                          }
+              },
+              {
+                  "selector":"edge",
+                  "style":{
+                      'label': 'data(count)',
+                      'target-arrow-shape': 'triangle',
+					  'line-color': '#9dbaea',
+					  'target-arrow-color': '#9dbaea',
+                      "width":"3"
+                          }
+              },
+              {
+                  "selector":"node.unhighlighted",
+                  "style":{"opacity":"0.2"}
+              },
+              {
+                  "selector":"edge.unhighlighted",
+                  "style":{"opacity":"0.05"}
+              },
+              {
+                  "selector":".highlighted",
+                  "style":{"z-index":"999999"}
+              },
+              {
+                  "selector":"node.highlighted",
+                  "style":{
+                      "border-width":"6px",
+                      "border-color":"#AAD8FF",
+                      "border-opacity":"0.5",
+                      "background-color":"#394855",
+                      "text-outline-color":"#394855",
+                      "shadow-blur":"12px",
+                      "shadow-color":"#000",
+                      "shadow-opacity":"0.8",
+                      "shadow-offset-x":"0px",
+                      "shadow-offset-y":"4px"
+                          }
+              },
+              {
+                  "selector":"edge.filtered",
+                  "style":{"opacity":"0"}
+              },
+              {
+                  "selector":"edge[group=\"coexp\"]",
+                  "style":{"line-color":"#d0b7d5"}
+              },
+              {
+                  "selector":"edge[group=\"coloc\"]",
+                  "style":{"line-color":"#a0b3dc"}
+              }],
+          elements: [
+<?php $first = true; foreach ($this->data['nodes'] as $id => $data):?>
+<?php if (!$first) echo ','; $first = false; ?>{data: { id: '<?= $data['id'] ?>', name: '<?= $data['name'] ?>', count: <?= $data['count'] ?> }}<?php endforeach; ?>
+,
+<?php $first = true; foreach ($this->data['edges'] as $id => $data):?>
+<?php if (!$first) echo ','; $first = false; ?>{data: { source: '<?= $data['source'] ?>', target: '<?= $data['target'] ?>', count: <?= $data['count'] ?> }}<?php endforeach; ?>
+         ]
+        });
+      });
+    </script>
+
+
+<div class="row">
+	<div id="cy" class="col-xs-12"></div>
+</div>

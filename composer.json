@@ -1,24 +1,27 @@
 {
   "name" : "los/zeus",
   "require" : {
-    "php" : "^5.6|^7.0",
-    "zendframework/zendframework" : "~2.4",
-    "zfcampus/zf-apigility" : "~1.1",
-    "zfcampus/zf-apigility-documentation" : "^1.0.5",
-    "zfcampus/zf-development-mode" : "~2.0",
+    "php" : "^7.0",
     "los/los-rate-limit" : "^0.9.1",
-    "zfcampus/zf-apigility-admin-ui" : "dev-master",
-    "zfcampus/zf-apigility-documentation-swagger" : "~1.1",
-    "ramsey/uuid" : "~3.0",
-    "los/losui" : "~1.0"
+    "zendframework/zend-expressive" : "^1.0",
+    "zendframework/zend-expressive-helpers" : "^2.0",
+    "zendframework/zend-stdlib" : "^2.7 || ^3.0",
+    "zendframework/zend-expressive-fastroute" : "^1.0",
+    "zendframework/zend-servicemanager" : "^2.7.3 || ^3.0",
+    "zendframework/zend-db" : "^2.8",
+    "los/basepath" : "^1.0",
+    "zendframework/zend-paginator" : "^2.7",
+    "ramsey/uuid" : "^3.4",
+    "moontoast/math" : "^1.1",
+    "zendframework/zend-inputfilter" : "^2.7",
+    "zendframework/zend-hydrator" : "^2.2",
+    "zendframework/zend-view" : "^2.8.1",
+    "zendframework/zend-expressive-zendviewrenderer" : "^1.1.0",
+    "los/api-server" : "^1.0"
   },
   "require-dev" : {
-    "zendframework/zftool" : "dev-master",
-    "zendframework/zend-developer-tools" : "dev-master",
-    "zfcampus/zf-apigility-admin" : "^1.3.1",
-    "zfcampus/zf-deploy" : "~1.0",
-    "zfr/zfr-cors" : "~1.2",
-    "zend/zend-studio-development-mode" : "~1.0"
+    "squizlabs/php_codesniffer" : "^2.3",
+    "filp/whoops" : "^1.1 || ^2.0"
   },
   "license" : "MIT",
   "autoload-dev" : {
@@ -33,7 +36,8 @@
   },
   "type" : "application",
   "scripts" : {
-    "test" : [ "php vendor/squizlabs/php_codesniffer/scripts/phpcs", "php vendor/phpunit/phpunit/phpunit" ]
+    "test" : [ "php vendor/squizlabs/php_codesniffer/scripts/phpcs", "php vendor/phpunit/phpunit/phpunit" ],
+    "serve" : "php -S 0.0.0.0:5000 -t public/ public/index.php"
   },
   "homepage" : "https://github.com/Lansoweb/zeus",
   "authors" : [ {

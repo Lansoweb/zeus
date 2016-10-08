@@ -1,0 +1,48 @@
+<style>
+    .page_not_found {
+        margin-top: 165px;
+        text-transform: uppercase;
+        font-size: 30px;
+        font-weight: bold;
+        color: #1fbfd7;
+        width: 100%;
+    }
+
+    .info_text {
+        margin-top: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #8e8e8e;
+        width: 280px;
+    }
+
+    a, a:hover, a:active, a:link, a:visited {
+        text-decoration: none;
+        color: #1fbfd7;
+    }
+
+    #list-content {
+    	padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top: 2px #337ab7 solid;
+    }
+</style>
+<div id="list-content">
+    <div class="row">
+        <div id="content">
+
+            <div class="col-xs-12 col-md-8">
+                <div class="page_not_found text-center"><?= $status .' - '. 'An Error occurred'; ?></div>
+                <dl>
+                    <dd>
+                        <pre class="alert alert-warning text-center"><?= $reason ?></pre>
+                    </dd>
+                </dl>
+            </div>
+
+        </div>
+    </div>
+</div>

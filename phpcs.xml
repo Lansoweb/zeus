@@ -1,22 +1,110 @@
-<?xml version="1.0"?>
-<ruleset name="Zend Framework coding standard">
-    <description>Zend Framework coding standard</description>
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Zeus">
+	<description>Zeus coding standard</description>
 
-    <!-- display progress -->
-    <arg value="p"/>
-    <arg name="colors"/>
+	<arg value="ps" />
+	<arg name="colors" />
+	<arg name="report" value="full"/>
 
-    <!-- inherit rules from: -->
-    <rule ref="PSR2"/>
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
-    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
+    <config name="colors" value="1"/>
+    <config name="show_progress" value="1"/>
+    <config name="default_standard" value="phpcs.xml"/>
+    
+	<encoding>UTF-8</encoding>
+
+	<file>src</file>
+	<file>config</file>
+
+    <rule ref="Generic.PHP.ForbiddenFunctions">
         <properties>
-            <property name="ignoreBlankLines" value="false"/>
+            <property name="forbiddenFunctions" type="array" 
+                value="delete=>unset,print=>echo,create_function=>null,var_dump=>null,die=>null" />
         </properties>
     </rule>
-
-    <!-- Paths to check -->
-    <file>module</file>
-    <file>test</file>
-    <exclude-pattern>*/module.config.php</exclude-pattern>
+    
+	<rule ref="Generic.Arrays.DisallowLongArraySyntax" />
+	<rule ref="Generic.CodeAnalysis.JumbledIncrementer" />
+	<rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />
+	<rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />
+	<rule ref="Generic.Commenting.Fixme" />
+	<rule ref="Generic.ControlStructures.InlineControlStructure" />
+	<rule ref="Generic.Files.LineEndings" />
+	<rule ref="Generic.Formatting.DisallowMultipleStatements" />
+	<rule ref="Generic.Formatting.SpaceAfterCast" />
+	<rule ref="Generic.Functions.CallTimePassByReference" />
+	<rule ref="Generic.Functions.FunctionCallArgumentSpacing" />
+	<rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman" />
+	<rule ref="Generic.Metrics.CyclomaticComplexity" />
+	<rule ref="Generic.Metrics.NestingLevel">
+		<properties>
+			<property name="nestingLevel" value="4" />
+			<property name="absoluteNestingLevel" value="6" />
+		</properties>
+	</rule>
+	<rule ref="Generic.NamingConventions.ConstructorName" />
+	<rule ref="Generic.NamingConventions.UpperCaseConstantName" />
+	<rule ref="Generic.NamingConventions.CamelCapsFunctionName" />
+	<rule ref="Generic.PHP.DeprecatedFunctions" />
+	<rule ref="Generic.PHP.DisallowShortOpenTag" />
+	<rule ref="Generic.PHP.ForbiddenFunctions" />
+	<rule ref="Generic.PHP.LowerCaseConstant" />
+	<rule ref="Generic.PHP.NoSilencedErrors">
+		<properties>
+			<property name="error" value="false" />
+		</properties>
+	</rule>
+	<rule ref="Generic.Strings.UnnecessaryStringConcat">
+		<properties>
+			<property name="error" value="false" />
+		</properties>
+	</rule>
+	<rule ref="Generic.WhiteSpace.DisallowTabIndent" />
+	<rule ref="Generic.WhiteSpace.ScopeIndent" />
+	<rule ref="MySource.PHP.EvalObjectFactory" />
+	<rule ref="MySource.PHP.GetRequestData" />
+	<rule ref="PEAR.Commenting.InlineComment" />
+	<rule ref="PSR2" />
+	<rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+	   <exclude-pattern>/config/*</exclude-pattern>
+	</rule>
+	<rule ref="Squiz.PHP.CommentedOutCode">
+		<properties>
+			<property name="maxPercentage" value="60" />
+		</properties>
+		<exclude-pattern>/config/*</exclude-pattern>
+	</rule>
+	<rule ref="Squiz.PHP.DisallowMultipleAssignments" />
+	<rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops" />
+	<rule ref="Squiz.PHP.Eval" />
+	<rule ref="Squiz.PHP.ForbiddenFunctions" />
+	<rule ref="Squiz.PHP.GlobalKeyword" />
+	<rule ref="Squiz.PHP.Heredoc" />
+	<rule ref="Squiz.PHP.InnerFunctions" />
+	<rule ref="Squiz.PHP.LowercasePHPFunctions" />
+	<rule ref="Squiz.PHP.NonExecutableCode" />
+	<rule ref="Squiz.Scope.MemberVarScope" />
+	<rule ref="Squiz.Scope.MethodScope" />
+	<rule ref="Squiz.Scope.StaticThisUsage" />
+	<rule ref="Squiz.WhiteSpace.CastSpacing" />
+	<!-- Conflito com PSR2 
+	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
+		<properties>
+			<property name="spacing" value="1" />
+		</properties>
+	</rule>
+	 -->
+	<rule ref="Squiz.WhiteSpace.LanguageConstructSpacing" />
+	<rule ref="Squiz.WhiteSpace.PropertyLabelSpacing" />
+	<rule ref="Squiz.WhiteSpace.ScopeClosingBrace" />
+	<rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing" />
+	<rule ref="Squiz.WhiteSpace.SemicolonSpacing" />
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
+	<rule ref="Zend.Files.ClosingTag" />
+	   <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="160" />
+            <property name="absoluteLineLimit" value="200" />
+        </properties>
+    </rule>
+	
 </ruleset>
