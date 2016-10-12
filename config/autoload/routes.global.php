@@ -6,6 +6,7 @@ return [
             Zend\Expressive\Router\RouterInterface::class => Zend\Expressive\Router\FastRouteRouter::class,
         ],
         'factories' => [
+            Zeus\Action\Artemis\CollectAction::class => Zeus\Action\Artemis\Factory\CollectActionFactory::class,
             Zeus\Action\Hermes\CollectAction::class => Zeus\Action\Hermes\Factory\CollectActionFactory::class,
             Zeus\Action\Hermes\ViewAction::class => Zeus\Action\Hermes\Factory\ViewActionFactory::class,
             Zeus\Action\Hermes\GraphAction::class => Zeus\Action\Hermes\Factory\GraphActionFactory::class,
@@ -30,6 +31,12 @@ return [
             'path' => '/v1/hermes/{graph}[/{project}]',
             'middleware' => Zeus\Action\Hermes\GraphAction::class,
             'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'artemis.collect',
+            'path' => '/v1/artemis/collect',
+            'middleware' => Zeus\Action\Artemis\CollectAction::class,
+            'allowed_methods' => ['POST'],
         ],
     ],
 ];
