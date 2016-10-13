@@ -72,10 +72,10 @@ class CollectAction
         ], ['id' => $id]);
 
         $requestId = null;
-        if (isset($params['request']['headers']['X-Request-Id'])) {
-            $requestId = $params['request']['headers']['X-Request-Id'];
-        } elseif (isset($params['request']['headers']['x-request-id'])) {
+        if (isset($params['request']['headers']['x-request-id'])) {
             $requestId = $params['request']['headers']['x-request-id'];
+        } elseif (isset($params['request']['headers']['X-Request-Id'])) {
+            $requestId = $params['request']['headers']['X-Request-Id'];
         }
 
         $data = [
